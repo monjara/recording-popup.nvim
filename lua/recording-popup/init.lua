@@ -28,13 +28,17 @@ M.closePopup = function()
 end
 
 M.exec = function()
+  vim.api.nvim_create_augroup('monjara-recording-popup', {})
+
   vim.api.nvim_create_autocmd({ 'RecordingEnter' }, {
+    group = 'monjara-recording-popup',
     callback = function()
       require('recording-popup').createPopup()
     end
   })
 
   vim.api.nvim_create_autocmd({ 'RecordingLeave' }, {
+    group = 'monjara-recording-popup',
     callback = function()
       require('recording-popup').closePopup()
     end
