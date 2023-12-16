@@ -27,4 +27,18 @@ M.closePopup = function()
   vim.api.nvim_win_hide(M.win_id)
 end
 
+M.exec = function()
+  vim.api.nvim_create_autocmd({ 'RecordingEnter' }, {
+    callback = function()
+      require('recording-popup').createPopup()
+    end
+  })
+
+  vim.api.nvim_create_autocmd({ 'RecordingLeave' }, {
+    callback = function()
+      require('recording-popup').closePopup()
+    end
+  })
+end
+
 return M
